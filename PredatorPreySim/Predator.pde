@@ -10,6 +10,8 @@ public class Predator{
   private boolean ate;
   private int birthRate;
   private long deltaT;
+  private int maxBirths;
+  private int totalBabies;
   
   public Predator(float x, float y){
     lastFrame = System.currentTimeMillis();
@@ -19,8 +21,9 @@ public class Predator{
     y_speed = 0.0;
     age = 0;
     r = 8.0;
-    life = random(2000, 3000); //ms
-    birthRate = int(random(800, 2000));
+    life = random(2500, 3500); //ms
+    birthRate = int(random(200, 500));
+    maxBirths = int(random(2, 4));
   }
   
   public void display(){
@@ -85,12 +88,19 @@ public class Predator{
   
   public void addBaby(){
     babies++;
-    life += 1000;
+    //totalBabies++;
+    //life += 1000;
   }
   
   public int reproduce(){
-    if (age/birthRate != (age-deltaT)/birthRate){
-      return babies;
+    if (age/birthRate != (age-deltaT)/birthRate && totalBabies < maxBirths){
+      int temp = babies;
+      if(babies + totalBabies > maxBirths){
+        temp = maxBirths - totalBabies;
+      }
+      totalBabies += temp;
+      return temp;
+      
     }
     return 0;
   }

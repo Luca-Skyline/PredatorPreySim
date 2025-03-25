@@ -1,5 +1,7 @@
 ArrayList<Predator> predators;
 ArrayList<Prey> prey;
+int spawnLiklihood = 100;
+
 
 void setup(){
   size(1000, 1000);
@@ -49,5 +51,13 @@ void draw(){
       prey.add(new Prey(prey.get(i).getX() + 5.0, prey.get(i).getY() + 5.0));
     }
   }
+  
+  //if(random(spawnLiklihood) > spawnLiklihood - 1){
+  //  prey.add(new Prey(random(100.0, width-100.0), random(100.0, height-100.0)));
+  //}
+  //if(random(spawnLiklihood) > spawnLiklihood - 1){
+  //  predators.add(new Predator(random(100.0, width-100.0), random(100.0, height-100.0)));
+  //}
+
 
 }
