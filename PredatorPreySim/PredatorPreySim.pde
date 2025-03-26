@@ -1,12 +1,17 @@
 ArrayList<Predator> predators;
 ArrayList<Prey> prey;
 int spawnLiklihood = 100;
+Table data;
+long deltaT;
+long lastFrame;
+long timeElapsed;
 
 
 void setup(){
   size(1000, 1000);
   predators = new ArrayList<Predator>();
   prey = new ArrayList<Prey>();
+
   
   for(int i = 0; i < 20; i++){
     predators.add(new Predator(random(100.0, width-100.0), random(100.0, height-100.0)));
@@ -18,6 +23,16 @@ void setup(){
   }
   
   System.out.println("starting");
+  
+  
+  data = new Table();
+  data.addColumn("seconds");
+  data.addColumn("predators");
+  data.addColumn("prey");
+  
+  lastFrame = System.currentTimeMillis();
+  timeElapsed = 0;
+  
   
 }
 
@@ -58,6 +73,24 @@ void draw(){
   //if(random(spawnLiklihood) > spawnLiklihood - 1){
   //  predators.add(new Predator(random(100.0, width-100.0), random(100.0, height-100.0)));
   //}
+  deltaT = System.currentTimeMillis() - lastFrame;
+  
+  System.out.println(deltaT + timeElapsed);
+  
+  if((deltaT + timeElapsed)/1000 != (timeElapsed)/1000){ //a second has passed
+    TableRow newRow = data.addRow();
+    newRow.setInt("seconds", int((deltaT + timeElapsed)/1000));
+    newRow.setInt("predators", predators.size());
+    newRow.setInt("prey", prey.size());
+    
+    if((deltaT + timeElapsed) >= 60000){
+      saveTable(data, "data/new.csv");
+      exit();
+    }
+  }
+  
+  timeElapsed += deltaT;
+  lastFrame = System.currentTimeMillis();
 
 
 }

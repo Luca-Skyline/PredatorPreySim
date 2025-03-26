@@ -23,7 +23,7 @@ public class Predator{
     r = 8.0;
     life = random(2500, 3500); //ms
     birthRate = int(random(200, 500));
-    maxBirths = int(random(2, 4));
+    maxBirths = int(random(2.5, 4));
   }
   
   public void display(){
