@@ -77,9 +77,9 @@ void draw(){
   
   System.out.println(deltaT + timeElapsed);
   
-  if((deltaT + timeElapsed)/1000 != (timeElapsed)/1000){ //a second has passed
+  if((deltaT + timeElapsed)/250 != (timeElapsed)/250){ //a second has passed
     TableRow newRow = data.addRow();
-    newRow.setInt("seconds", int((deltaT + timeElapsed)/1000));
+    newRow.setFloat("seconds", 0.54);
     newRow.setInt("predators", predators.size());
     newRow.setInt("prey", prey.size());
     
